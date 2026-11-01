@@ -447,6 +447,43 @@
             line-height: 1.8;
         }
         .instruction-box li strong { color: var(--primary); }
+        
+        /* New Style for Username Display */
+        .username-display-box {
+            background: #fff;
+            border: 2px dashed var(--accent2);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .username-display-box p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+        .username-highlight {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: block;
+            margin: 5px 0;
+        }
+        .copy-handle-btn {
+            background: var(--accent2);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background 0.3s;
+        }
+        .copy-handle-btn:hover {
+            background: #0099cc;
+        }
+
         .action-button-large {
             display: flex;
             align-items: center;
@@ -462,6 +499,8 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             margin-top: 10px;
+            cursor: pointer;
+            border: none;
         }
         .action-button-large:hover {
             background: var(--accent);
@@ -925,9 +964,18 @@
                         <li>Hit Send. We will verify and deliver within minutes.</li>
                     </ol>
                     
-                    <a href="#" id="telegramFinalLink" class="action-button-large" target="_blank">
+                    <!-- Visible Username Display -->
+                    <div class="username-display-box">
+                        <p>Or search manually in Telegram:</p>
+                        <span class="username-highlight">@solar98727</span>
+                        <button class="copy-handle-btn" onclick="copyHandle('@solar98727')">Copy Handle</button>
+                        <p style="margin-top:10px; font-size:0.9rem; color:#666;">Link: t.me/solar98727</p>
+                    </div>
+
+                    <!-- Changed from <a> to <button> for better JS control -->
+                    <button id="telegramFinalLink" class="action-button-large">
                         <i class="fab fa-telegram-plane"></i> Click Here to Send Payment Proof
-                    </a>
+                    </button>
                     
                     <span class="warning-text">
                         ⚠️ Without the payment screenshot, we cannot process your order.
@@ -967,7 +1015,7 @@
             <div class="footer-links">
                 <h4>Contact & Community</h4>
                 <ul>
-                    <li><a href="https://t.me/solar98717" target="_blank">Telegram: @solar98717</a></li>
+                    <li><a href="https://t.me/solar98727" target="_blank">Telegram: @solar98727</a></li>
                     <li><a href="https://chat.whatsapp.com/GOcT7S8XlX25jrC4Zonqii?s=cl&p=a&iam=2" target="_blank" style="color: var(--whatsapp-green); font-weight: 700;">
                         <i class="fab fa-whatsapp"></i> Join WhatsApp Group
                     </a></li>
@@ -1001,7 +1049,7 @@
         const CHANNEL_ID = '-1004420240353'; 
         
         // 3. YOUR PERSONAL USERNAME FOR DIRECT MESSAGING (UPDATED)
-        const MY_TELEGRAM_USERNAME = 'Solar98717'; 
+        const MY_TELEGRAM_USERNAME = 'solar98727'; 
         // ============================================================
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
@@ -1021,6 +1069,16 @@
             toast.className = 'toast' + (isError ? ' error' : '');
             toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        // Helper to copy handle
+        function copyHandle(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('✓ Handle copied!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Could not copy automatically. Please copy manually: ' + text);
+            });
         }
 
         // Pre-select product when clicking "Buy Now"
@@ -1073,37 +1131,61 @@
                     showToast(`⚠️ Auto-log Failed: ${result.description}`, true);
                 }
 
-                // --- ALWAYS SHOW USER THE MANUAL PROOF OPTION (FALLBACK) ---
-                // Even if the channel log fails, the user gets the button to DM you directly.
-                
-                const userMessage = `Hello Solar,\n\nI have paid via BEP20.\n\nMy Details:\nName: ${name}\nEmail: ${email}\nProduct: ${productType}\nDetails: ${qtyDetails}\nNotes: ${notes}\n\n(Please find attached my Payment Screenshot)`;
-                
-                const encodedMsg = encodeURIComponent(userMessage);
-                // Uses t.me/Solar98717 as requested
-                const telegramUrl = `https://t.me/${MY_TELEGRAM_USERNAME}?text=${encodedMsg}`;
-                
-                document.getElementById('telegramFinalLink').href = telegramUrl;
-                
-                // Hide Form, Show Instructions
+                // --- HIDE FORM AND SHOW INSTRUCTIONS ---
                 document.getElementById('orderForm').style.display = 'none';
                 document.getElementById('instructionBox').classList.add('show');
                 document.getElementById('instructionBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // --- STORE DATA GLOBALLY FOR THE BUTTON CLICK EVENT ---
+                window.pendingTelegramMessage = `Hello Solar,\n\nI have paid via BEP20.\n\nMy Details:\nName: ${name}\nEmail: ${email}\nProduct: ${productType}\nDetails: ${qtyDetails}\nNotes: ${notes}\n\n(Please find attached my Payment Screenshot)`;
 
             } catch (error) {
                 console.error('Critical Network Error:', error);
                 showToast('❌ Connection Error. Please send proof manually.', true);
                 
-                // Still show the manual link as fallback
-                const userMessage = `Hello Solar,\n\nI tried to order online but had a connection issue.\n\nMy Details:\nName: ${document.getElementById('clientName').value}\nEmail: ${document.getElementById('clientEmail').value}\nProduct: ${document.getElementById('productType').value}\n\n(Please check my payment screenshot)`;
-                const encodedMsg = encodeURIComponent(userMessage);
-                document.getElementById('telegramFinalLink').href = `https://t.me/${MY_TELEGRAM_USERNAME}?text=${encodedMsg}`;
-                
+                // Still show instructions even on error
                 document.getElementById('orderForm').style.display = 'none';
                 document.getElementById('instructionBox').classList.add('show');
+                
+                // Store fallback message
+                window.pendingTelegramMessage = `Hello Solar,\n\nI tried to order online but had a connection issue.\n\nMy Details:\nName: ${document.getElementById('clientName').value}\nEmail: ${document.getElementById('clientEmail').value}\nProduct: ${document.getElementById('productType').value}\n\n(Please check my payment screenshot)`;
+                
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
         }
+
+        // ============================================================
+        // FIX: ATTACH DIRECT CLICK LISTENER TO THE BUTTON
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const telegramButton = document.getElementById('telegramFinalLink');
+            
+            if (telegramButton) {
+                telegramButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
+                    
+                    // Check if we have stored data
+                    if (!window.pendingTelegramMessage) {
+                        alert("No order details found. Please fill out the form first.");
+                        return;
+                    }
+
+                    // Construct the URL dynamically
+                    const encodedMsg = encodeURIComponent(window.pendingTelegramMessage);
+                    const url = `https://t.me/${MY_TELEGRAM_USERNAME}?text=${encodedMsg}`;
+                    
+                    // Open directly using window.open
+                    // This bypasses browser blocking issues associated with href changes
+                    const newWindow = window.open(url, '_blank');
+                    
+                    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                        // Fallback if popup blocker stops it
+                        alert("Pop-up blocked! Please allow pop-ups for this site or copy this link:\n" + url);
+                    }
+                });
+            }
+        });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
