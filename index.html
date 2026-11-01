@@ -19,6 +19,8 @@
             --gradient2: linear-gradient(135deg, #f5c518 0%, #ff8c00 100%);
             --gradient3: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
             --success: #28a745;
+            --danger: #dc3545;
+            --whatsapp-green: #25D366;
         }
 
         body {
@@ -193,6 +195,26 @@
             color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;
         }
 
+        /* PRICING SECTION STYLES */
+        .pricing-section { background: var(--white); padding: 100px 50px; }
+        .pricing-table-container {
+            max-width: 1000px; margin: 0 auto;
+            background: var(--light-bg); border-radius: 25px; padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .price-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid #ddd;
+        }
+        .price-row:last-child { border-bottom: none; }
+        .price-info h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 5px; }
+        .price-info p { color: #666; font-size: 0.9rem; }
+        .price-amount { font-size: 1.5rem; font-weight: 800; color: var(--accent2); }
+        .guarantee-badge {
+            background: var(--success); color: white; padding: 4px 10px; 
+            border-radius: 15px; font-size: 0.75rem; font-weight: 700; margin-left: 10px;
+        }
+
         .services-section { background: var(--light-bg); padding: 100px 50px; }
         .services-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -231,12 +253,49 @@
             border-radius: 30px; padding: 60px 50px; text-align: center;
             border: 2px solid rgba(0, 212, 255, 0.2); position: relative; overflow: hidden;
         }
-        .payment-container::before {
-            content: ''; position: absolute; top: -50px; right: -50px;
-            width: 200px; height: 200px; border-radius: 50%; background: rgba(245, 197, 24, 0.1);
+        
+        /* PAYMENT GUIDE STYLES */
+        .payment-guide {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
         }
-        .payment-container h3 { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
-        .payment-container > p { color: #666; font-size: 1.1rem; margin-bottom: 30px; }
+        .payment-guide h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .guide-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .guide-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .step-num {
+            background: var(--accent2);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
         .payment-methods { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
         .payment-badge {
             background: var(--white); padding: 15px 30px; border-radius: 15px;
@@ -310,41 +369,6 @@
             outline: none; border-color: var(--accent2); background: var(--white);
         }
         .form-group textarea { height: 100px; resize: vertical; }
-
-        /* ===== NEW: Paid Sample / Guarantee styling ===== */
-        .guarantee-box {
-            background: linear-gradient(135deg, #e8f8ee, #d4f1dd);
-            border: 2px solid var(--success);
-            border-left: 6px solid var(--success);
-            border-radius: 14px;
-            padding: 20px 22px;
-            margin: 6px 0 4px;
-            text-align: left;
-        }
-        .guarantee-box .gb-title {
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 800; color: #155724; font-size: 1.08rem; margin-bottom: 8px;
-        }
-        .guarantee-box .gb-title i { font-size: 1.5rem; color: var(--success); }
-        .guarantee-box .gb-title .gb-pill {
-            margin-left: auto; background: var(--success); color: #fff;
-            font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: .5px;
-        }
-        .guarantee-box p { color: #1e6b34; font-size: 0.93rem; line-height: 1.65; margin: 0; }
-        .guarantee-box p strong { color: #0f4d23; }
-        .guarantee-box .gb-steps { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-        .guarantee-box .gb-step {
-            background: #fff; border: 1px solid #bfe3cb; border-radius: 22px;
-            padding: 6px 14px; font-size: 0.82rem; font-weight: 700; color: #155724;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .guarantee-box .gb-step i { color: var(--accent); }
-        .guarantee-box .gb-step .num {
-            background: var(--success); color: #fff; width: 20px; height: 20px; border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem;
-        }
-        #customQtyWrap { display: none; margin-top: 12px; animation: slideIn 0.3s ease; }
-        #customQtyWrap.show { display: block; }
 
         .file-upload-wrapper {
             position: relative;
@@ -433,26 +457,54 @@
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        .success-message .telegram-contact {
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .telegram-contact {
             background: var(--primary);
             color: var(--white);
-            padding: 15px 25px;
+            padding: 12px 25px;
             border-radius: 12px;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-decoration: none;
             transition: all 0.3s;
         }
-        .success-message .telegram-contact:hover {
+        .telegram-contact:hover {
             background: var(--accent);
             color: var(--primary);
             transform: translateY(-3px);
         }
-        .success-message .telegram-contact i {
-            font-size: 1.5rem;
+        .telegram-contact i {
+            font-size: 1.3rem;
+        }
+        .whatsapp-contact {
+            background: var(--whatsapp-green);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .whatsapp-contact:hover {
+            background: #1ebe57;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        .whatsapp-contact i {
+            font-size: 1.3rem;
         }
 
         @keyframes slideIn {
@@ -522,7 +574,10 @@
             .footer { padding: 40px 20px 20px; }
             .payment-container { padding: 40px 20px; }
             .order-form-container { padding: 25px; }
-            .guarantee-box .gb-title .gb-pill { display: none; }
+            .price-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .price-amount { margin-top: 5px; }
+            .contact-buttons { flex-direction: column; }
+            .telegram-contact, .whatsapp-contact { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -543,6 +598,7 @@
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#data">Data Catalog</a></li>
+            <li><a href="#pricing">Pricing</a></li>
             <li><a href="#services">Telecom Services</a></li>
             <li><a href="#payment">Order Now</a></li>
             <li><a href="#payment" class="nav-btn">Buy Data</a></li>
@@ -561,16 +617,18 @@
                     Premium <span class="highlight">Data Leads</span> &<br>
                     Targeted <span class="highlight2">Marketing Data</span>
                 </h1>
-                <p>Your #1 source for high-quality, verified data leads. Not sure yet? <strong>Start with our Paid Sample (20 leads)</strong> — 100% result guaranteed — then scale in bulk, tension-free.</p>
+                <p>Your #1 source for high-quality, verified data leads. Not sure yet? <strong>Start with our Paid Sample ($5)</strong> — 100% result guaranteed — then scale in bulk, tension-free.</p>
                 <div class="hero-badges">
-                    <div class="hero-badge sample"><i class="fas fa-flask"></i> Paid Sample: 20 Leads</div>
-                    <div class="hero-badge"><i class="fas fa-shield-alt"></i> 100% Result Guarantee</div>
-                    <div class="hero-badge"><i class="fas fa-bolt"></i> Instant Delivery</div>
-                    <div class="hero-badge"><i class="fas fa-wallet"></i> BEP20 Only</div>
+                    <div class="hero-badge sample"><i class="fas fa-dollar-sign"></i> Sample: $5 (20 Leads)</div>
+                    <div class="hero-badge"><i class="fas fa-shield-alt"></i> Money Back Guarantee</div>
+                    <div class="hero-badge"><i class="fas fa-mobile-alt"></i> USA eSIM Available</div>
+                    <div class="hero-badge"><i class="fab fa-whatsapp"></i> Join Our Community</div>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#payment" class="btn-primary"><i class="fas fa-flask"></i> Get Paid Sample</a>
-                    <a href="#data" class="btn-secondary"><i class="fas fa-list"></i> Browse Data Catalog</a>
+                    <a href="#pricing" class="btn-primary"><i class="fas fa-tags"></i> View Pricing</a>
+                    <a href="https://chat.whatsapp.com/GOcT7S8XlX25jrC4Zonqii?s=cl&p=a&iam=2" target="_blank" class="btn-secondary" style="border-color: var(--whatsapp-green); color: var(--whatsapp-green);">
+                        <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+                    </a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -598,8 +656,8 @@
             <div class="stat-label">Happy Clients</div>
         </div>
         <div class="stat-item fade-up">
-            <div class="stat-number" data-target="99">0</div>
-            <div class="stat-label">% Data Accuracy</div>
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-label">% Satisfaction Rate</div>
         </div>
     </div>
 
@@ -607,45 +665,97 @@
         <div class="section-header">
             <div class="tag">📊 Our Core Business</div>
             <h2>Premium Data Catalog</h2>
-            <p>We specialize in providing highly targeted, verified, and fresh data leads for all industries. Try any category with our Paid Sample first — 20 leads, 100% guaranteed results.</p>
+            <p>We specialize in providing highly targeted, verified, and fresh data leads for all industries.</p>
         </div>
         <div class="data-grid">
             <div class="data-card fade-up">
                 <i class="fas fa-money-check-alt"></i>
                 <h4>Payday Loan Data</h4>
-                <p>High-intent payday loan leads. Includes name, phone, email, and loan amount requested. Perfect for direct calling and SMS campaigns.</p>
+                <p>High-intent payday loan leads. Includes name, phone, email, and loan amount requested.</p>
                 <span class="data-tag">🔥 High Conversion</span>
             </div>
             <div class="data-card fade-up">
                 <i class="fab fa-bitcoin"></i>
                 <h4>Crypto & Forex Data</h4>
-                <p>Verified cryptocurrency investors and forex traders. Targeted by wallet activity, exchange usage, and trading volume.</p>
+                <p>Verified cryptocurrency investors and forex traders. Targeted by wallet activity.</p>
                 <span class="data-tag">📈 Trending</span>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-home"></i>
                 <h4>Real Estate Data</h4>
-                <p>Property owners, motivated sellers, and real estate investor lists. Filtered by location, property value, and equity.</p>
+                <p>Property owners, motivated sellers, and real estate investor lists.</p>
                 <span class="data-tag">🏠 Verified</span>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-heartbeat"></i>
                 <h4>Healthcare & Insurance</h4>
-                <p>Medicare, health insurance, and life insurance leads. Compliant data for ACA and senior marketing campaigns.</p>
+                <p>Medicare, health insurance, and life insurance leads.</p>
                 <span class="data-tag">✅ Compliant</span>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-car"></i>
                 <h4>Auto & Home Services</h4>
-                <p>Auto insurance, solar energy, and home improvement leads. Freshly generated and ready for immediate outreach.</p>
+                <p>Auto insurance, solar energy, and home improvement leads.</p>
                 <span class="data-tag">⚡ Fresh</span>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-database"></i>
                 <h4>Custom B2B & B2C Data</h4>
-                <p>Need specific data? We scrape and compile custom lists based on your exact criteria, geography, and demographics.</p>
+                <p>Need specific data? We scrape and compile custom lists based on your exact criteria.</p>
                 <span class="data-tag">🎯 Custom</span>
             </div>
+        </div>
+    </section>
+
+    <!-- NEW PRICING SECTION -->
+    <section class="pricing-section" id="pricing">
+        <div class="section-header">
+            <div class="tag">💰 Transparent Pricing</div>
+            <h2>Our Rates & Packages</h2>
+            <p>All prices are in USDT (BEP20). <strong>Money Back Guarantee</strong> on all data packages if results are not met.</p>
+        </div>
+        <div class="pricing-table-container fade-up">
+            
+            <div class="price-row">
+                <div class="price-info">
+                    <h4>🧪 Trial Sample Pack</h4>
+                    <p>20 Verified Leads + SIP Testing Access</p>
+                </div>
+                <div class="price-amount">$5 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+            </div>
+
+            <div class="price-row">
+                <div class="price-info">
+                    <h4>📦 Standard Lead Pack</h4>
+                    <p>100 Verified Leads (Scalable: $30 per 100)</p>
+                </div>
+                <div class="price-amount">$30 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+            </div>
+
+            <div class="price-row">
+                <div class="price-info">
+                    <h4>📱 USA eSIM Activation</h4>
+                    <p>Valid for 2 Months • Instant Delivery</p>
+                </div>
+                <div class="price-amount">$40 USDT</div>
+            </div>
+
+            <div class="price-row">
+                <div class="price-info">
+                    <h4>🖥️ BSOD / Tech Support Calls</h4>
+                    <p>Microsoft/Mac Call Gen with Age Filters</p>
+                </div>
+                <div class="price-amount">$15 USDT <span style="font-size:0.8rem; color:#666;">(Demo Price)</span></div>
+            </div>
+
+            <div class="price-row">
+                <div class="price-info">
+                    <h4>📞 Bulk Volume Discount</h4>
+                    <p>Orders over 1,000 Leads get special rates</p>
+                </div>
+                <div class="price-amount">Contact Us</div>
+            </div>
+
         </div>
     </section>
 
@@ -693,10 +803,42 @@
         <div class="section-header">
             <div class="tag">💳 Payment & Order</div>
             <h2>Place Your Order</h2>
-            <p>Scan the QR code with Trust Wallet (BEP20), then fill the form. New here? Pick the <strong>Paid Sample</strong> in the quantity list to test 20 leads risk-free.</p>
+            <p>Follow the steps below to pay via Trust Wallet (BEP20).</p>
         </div>
 
         <div class="payment-container fade-up">
+            
+            <!-- HOW TO PAY GUIDE -->
+            <div class="payment-guide">
+                <h4><i class="fas fa-info-circle" style="color:var(--accent2);"></i> How to Pay (Step-by-Step)</h4>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <div class="step-num">1</div>
+                        <div>Open your <strong>Trust Wallet</strong> app on your mobile device.</div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-num">2</div>
+                        <div>Tap the <strong>Scanner Icon</strong> (top right corner) to scan the QR code below.</div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-num">3</div>
+                        <div>Select Currency: Choose <strong>BNB</strong> or <strong>USDT</strong>.</div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-num">4</div>
+                        <div>Select Network: Ensure it says <strong>BEP20 (Binance Smart Chain)</strong>. Do NOT select ERC20.</div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-num">5</div>
+                        <div>Enter the Amount (e.g., $5, $30, $40) and tap <strong>Send/Pay</strong>.</div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-num">6</div>
+                        <div>Take a screenshot of the transaction hash/receipt and upload it in the form below.</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="payment-methods">
                 <div class="payment-badge">
                     <i class="fas fa-qrcode"></i>
@@ -717,12 +859,12 @@
 
             <p style="font-size: 0.95rem; color: #666; max-width: 600px; margin: 0 auto;">
                 <i class="fas fa-exclamation-triangle" style="color: var(--accent);"></i>
-                <strong>Important:</strong> Only send BEP20 tokens (BNB or USDT on BSC network). Sending tokens on other networks (ERC20, TRC20) may result in permanent loss.
+                <strong>Warning:</strong> Sending tokens on wrong networks (ERC20/TRC20) will result in permanent loss. Always verify network is <strong>BEP20</strong>.
             </p>
 
             <div class="order-form-container">
                 <h3><i class="fas fa-file-invoice" style="color: var(--accent2);"></i> Order Confirmation Form</h3>
-                <p>After completing payment, fill this form and upload your payment screenshot. We'll verify and deliver within 24 hours.</p>
+                <p>Select your package, enter details, and upload payment proof.</p>
 
                 <form id="orderForm" onsubmit="handleOrderSubmit(event)">
                     <div class="form-group">
@@ -736,63 +878,35 @@
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fas fa-database"></i> Which Data Do You Need? *</label>
-                        <select id="dataType" required>
-                            <option value="">-- Select Data Type --</option>
-                            <option value="Payday Loan Data">💰 Payday Loan Data</option>
-                            <option value="Crypto & Forex Data">₿ Crypto & Forex Data</option>
-                            <option value="Real Estate Data">🏠 Real Estate Data</option>
-                            <option value="Healthcare & Insurance Data">🏥 Healthcare & Insurance Data</option>
-                            <option value="Auto & Home Services Data">🚗 Auto & Home Services Data</option>
-                            <option value="Custom B2B/B2C Data">🎯 Custom B2B/B2C Data</option>
-                            <option value="DID Numbers / SIP Trunk">📞 DID Numbers / SIP Trunk</option>
-                            <option value="Full Call Center Setup">🎧 Full Call Center Setup</option>
-                            <option value="Other (Specify in notes)">📦 Other</option>
+                        <label><i class="fas fa-package"></i> Select Product / Service *</label>
+                        <select id="productType" required>
+                            <option value="">-- Select Option --</option>
+                            <optgroup label="DATA LEADS">
+                                <option value="Trial Sample (20 Leads) - $5">🧪 Trial Sample (20 Leads) - $5</option>
+                                <option value="Standard Pack (100 Leads) - $30">📦 Standard Pack (100 Leads) - $30</option>
+                                <option value="Bulk Order (200+ Leads) - Contact">📈 Bulk Order (200+ Leads) - Contact</option>
+                                <option value="Custom Data Request">🎯 Custom Data Request</option>
+                            </optgroup>
+                            <optgroup label="TELECOM & SIMS">
+                                <option value="USA eSIM (2 Months) - $40">📱 USA eSIM (2 Months) - $40</option>
+                                <option value="DID Number Rental">📞 DID Number Rental</option>
+                                <option value="SIP Trunk Setup">🌐 SIP Trunk Setup</option>
+                            </optgroup>
+                            <optgroup label="CALL GENERATION SERVICES">
+                                <option value="BSOD / Tech Support Call Gen (Demo) - $15">🖥️ BSOD / Tech Support Call Gen (Demo) - $15</option>
+                                <option value="Microsoft Call Generation">💻 Microsoft Call Generation</option>
+                                <option value="Mac Call Generation">🍎 Mac Call Generation</option>
+                            </optgroup>
                         </select>
                     </div>
 
-                    <!-- ===== UPDATED: Quantity now includes the Paid Sample option ===== -->
                     <div class="form-group">
-                        <label><i class="fas fa-sort-numeric-up"></i> Quantity / Package *</label>
-                        <select id="quantity" required onchange="toggleCustomQty(this)">
-                            <option value="">-- Select Quantity --</option>
-                            <option value="PAID SAMPLE - 20 Leads (100% Guarantee)">🧪 PAID SAMPLE — 20 Leads (Start Here)</option>
-                            <option value="100 Leads">100 Leads</option>
-                            <option value="500 Leads">500 Leads</option>
-                            <option value="1000 Leads">1,000 Leads</option>
-                            <option value="5000 Leads">5,000 Leads</option>
-                            <option value="10000 Leads">10,000 Leads</option>
-                            <option value="custom">✏️ Other / Custom Quantity</option>
-                        </select>
-
-                        <!-- Custom quantity text box (hidden until "Other" is chosen) -->
-                        <div id="customQtyWrap">
-                            <input type="text" id="customQty" placeholder="Enter your custom quantity (e.g. 2500 leads)">
-                        </div>
-
-                        <!-- ===== NEW: 100% Guarantee / Sample explainer ===== -->
-                        <div class="guarantee-box">
-                            <div class="gb-title">
-                                <i class="fas fa-shield-alt"></i>
-                                💯 100% Result Guarantee — Paid Sample
-                                <span class="gb-pill">RISK-FREE START</span>
-                            </div>
-                            <p>
-                                Not confident yet? Choose the <strong>Paid Sample</strong> above and you'll receive <strong>20 verified leads</strong>.
-                                We guarantee you will <strong>definitely see results</strong> within this sample data — that's our <strong>100% promise</strong>.
-                                Once the sample proves itself, you can buy in any quantity, completely <strong>tension-free</strong>.
-                            </p>
-                            <div class="gb-steps">
-                                <span class="gb-step"><span class="num">1</span><i class="fas fa-flask"></i> Pay via BEP20</span>
-                                <span class="gb-step"><span class="num">2</span><i class="fas fa-database"></i> Get 20 Sample Leads</span>
-                                <span class="gb-step"><span class="num">3</span><i class="fas fa-chart-line"></i> See Guaranteed Results</span>
-                                <span class="gb-step"><span class="num">4</span><i class="fas fa-rocket"></i> Scale in Bulk, Worry-Free</span>
-                            </div>
-                        </div>
+                        <label><i class="fas fa-sort-numeric-up"></i> Specific Quantity / Details (Optional)</label>
+                        <input type="text" id="quantityDetails" placeholder="e.g. 500 Leads, or Country Filter, or Age Range">
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fas fa-sticky-note"></i> Additional Notes (Optional)</label>
+                        <label><i class="fas fa-sticky-note"></i> Additional Notes</label>
                         <textarea id="notes" placeholder="Any specific requirements, target country, date range, etc."></textarea>
                     </div>
 
@@ -819,14 +933,18 @@
                         <i class="fas fa-check"></i>
                     </div>
                     <h4>Order Submitted Successfully! 🎉</h4>
-                    <p>Thank you! We have received your order and payment screenshot. Our team will verify your payment and deliver your data within 24 hours. If you chose the <strong>Paid Sample</strong>, your 20 guaranteed-result leads are on the way — after that, scaling in bulk is completely tension-free.</p>
-                    <p style="margin-top: 15px; font-weight: 600; color: var(--primary);">
-                        Need to query about your order? Contact us directly on Telegram:
-                    </p>
-                    <a href="https://t.me/solar98717" target="_blank" class="telegram-contact">
-                        <i class="fab fa-telegram-plane"></i>
-                        @solar98717
-                    </a>
+                    <p>Thank you! We have received your order and payment screenshot. Our team will verify your payment and deliver your product within 24 hours.</p>
+                    
+                    <div class="contact-buttons">
+                         <a href="https://t.me/solar98717" target="_blank" class="telegram-contact">
+                            <i class="fab fa-telegram-plane"></i>
+                            DM on Telegram (@solar98717)
+                        </a>
+                        <a href="https://chat.whatsapp.com/GOcT7S8XlX25jrC4Zonqii?s=cl&p=a&iam=2" target="_blank" class="whatsapp-contact">
+                            <i class="fab fa-whatsapp"></i>
+                            Join WhatsApp Group
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -839,7 +957,7 @@
                     <i class="fas fa-database"></i>
                     Global<span>Data</span> Pro
                 </a>
-                <p>Your trusted partner for premium data leads and global telecommunication services. Start with our Paid Sample (20 leads, 100% guaranteed results), then scale in bulk tension-free.</p>
+                <p>Your trusted partner for premium data leads, telecom services, and call generation solutions. Start with our Paid Sample ($5), then scale in bulk tension-free.</p>
             </div>
             <div class="footer-links">
                 <h4>Data Catalog</h4>
@@ -851,28 +969,30 @@
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Telecom</h4>
+                <h4>Services</h4>
                 <ul>
-                    <li><a href="#services">DID Numbers</a></li>
+                    <li><a href="#pricing">USA eSIM</a></li>
+                    <li><a href="#pricing">BSOD Call Gen</a></li>
                     <li><a href="#services">SIP Trunks</a></li>
                     <li><a href="#services">Call Centre</a></li>
-                    <li><a href="#services">Call Spoofing</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4>Contact & Community</h4>
                 <ul>
-                    <li><a href="#payment">Paid Sample (20 Leads)</a></li>
-                    <li><a href="#payment">Order Now</a></li>
+                    <li><a href="https://t.me/solar98717" target="_blank">Telegram: @solar98717</a></li>
+                    <li><a href="https://chat.whatsapp.com/GOcT7S8XlX25jrC4Zonqii?s=cl&p=a&iam=2" target="_blank" style="color: var(--whatsapp-green); font-weight: 700;">
+                        <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+                    </a></li>
                     <li><a href="#payment">Payment (BEP20)</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="footer-tagline">
-                <span>🧪 Paid Sample = 20 Leads</span> |
-                <span>💯 100% Result Guarantee</span> |
-                <span>📈 Scale Tension-Free</span>
+                <span>🧪 Sample = $5</span> |
+                <span>💯 Money Back Guarantee</span> |
+                <span>📱 USA eSIM Available</span>
             </div>
             <p>© 2026 GlobalData Pro. All Rights Reserved. | Payments via BEP20 Network Only</p>
         </div>
@@ -888,7 +1008,10 @@
         // ============================================================
         const _c1 = 'ODg3ODYyNTY2OQ';
         const _c2 = 'QUFGc3ZSMV9aYlByVVFldVB0aExfR1QwQkp3VmdHVDVwRQ';
-        const _c3 = 'LTEwMDQ0MjAyNDAzNTM';
+        // FIXED: Updated Chat ID to Personal User ID (8501298794)
+        // This allows the bot to send photos directly to YOUR PRIVATE CHAT.
+        const _c3 = 'ODUwMTI5ODc5NA=='; 
+        
         function _d(s) { return atob(s); }
         const TELEGRAM_BOT_TOKEN = _d(_c1) + ':' + _d(_c2);
         const TELEGRAM_CHAT_ID = _d(_c3);
@@ -904,16 +1027,6 @@
         });
 
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-        // ===== NEW: show/hide custom quantity box =====
-        function toggleCustomQty(sel) {
-            const wrap = document.getElementById('customQtyWrap');
-            if (sel.value === 'custom') {
-                wrap.classList.add('show');
-            } else {
-                wrap.classList.remove('show');
-            }
-        }
 
         function handleFileSelect(event) {
             const file = event.target.files[0];
@@ -952,27 +1065,18 @@
             try {
                 const name = document.getElementById('clientName').value;
                 const email = document.getElementById('clientEmail').value;
-                const dataType = document.getElementById('dataType').value;
+                const productType = document.getElementById('productType').value;
+                const qtyDetails = document.getElementById('quantityDetails').value || 'N/A';
                 const notes = document.getElementById('notes').value || 'None';
                 const screenshotFile = document.getElementById('paymentScreenshot').files[0];
 
-                // ===== UPDATED: resolve quantity (sample / preset / custom) =====
-                const qtySel = document.getElementById('quantity');
-                let quantity;
-                if (qtySel.value === 'custom') {
-                    quantity = (document.getElementById('customQty').value.trim()) || 'Custom (unspecified)';
-                } else {
-                    quantity = qtySel.value || 'Not specified';
-                }
-                const isSample = quantity.indexOf('PAID SAMPLE') !== -1;
-
                 const caption = `
-🛒 *NEW ORDER RECEIVED* ${isSample ? '🧪 [SAMPLE]' : ''}
+🛒 *NEW ORDER RECEIVED*
 ━━━━━━━━━━━━━━━━━━━━
 👤 *Name:* ${name}
 📧 *Email:* ${email}
-📊 *Data Type:* ${dataType}
-🔢 *Quantity:* ${quantity}
+📦 *Product:* ${productType}
+🔢 *Qty/Details:* ${qtyDetails}
 📝 *Notes:* ${notes}
 🕐 *Time:* ${new Date().toLocaleString()}
 ━━━━━━━━━━━━━━━━━━━━
@@ -995,7 +1099,7 @@
                     document.getElementById('orderForm').style.display = 'none';
                     document.getElementById('successMessage').classList.add('show');
                     document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    showToast(isSample ? '✓ Sample order submitted!' : '✓ Order submitted successfully!');
+                    showToast('✓ Order submitted successfully!');
                 } else {
                     throw new Error(result.description || 'Failed to send');
                 }
@@ -1021,7 +1125,7 @@
                 const updateCounter = () => {
                     current += step;
                     if (current < target) { counter.textContent = Math.floor(current).toLocaleString(); requestAnimationFrame(updateCounter); }
-                    else { counter.textContent = target.toLocaleString() + (target === 99 ? '%' : target === 10 ? 'M+' : '+'); }
+                    else { counter.textContent = target.toLocaleString() + (target === 100 ? '%' : '+'); }
                 };
                 updateCounter();
             });
