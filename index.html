@@ -1000,8 +1000,8 @@
         // 2. Channel ID (Plain Text)
         const CHANNEL_ID = '-1004420240353'; 
         
-        // 3. Your Personal Username for Fallback Link
-        const MY_TELEGRAM_USERNAME = 'solar98717'; 
+        // 3. YOUR PERSONAL USERNAME FOR DIRECT MESSAGING (UPDATED)
+        const MY_TELEGRAM_USERNAME = 'Solar98717'; 
         // ============================================================
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
@@ -1052,7 +1052,7 @@
                 // --- CONSTRUCT MESSAGE FOR CHANNEL ---
                 const channelMessage = `🛒 NEW ORDER LOGGED\n------------------------\n👤 Name: ${name}\n📧 Email: ${email}\n📦 Product: ${productType}\n🔢 Qty/Details: ${qtyDetails}\n📝 Notes: ${notes}\n🕐 Time: ${new Date().toLocaleString()}`;
 
-                // --- SEND TO CHANNEL USING FORMDATA (RAW) ---
+                // --- SEND TEXT DETAILS TO CHANNEL AUTOMATICALLY ---
                 const formData = new FormData();
                 formData.append('chat_id', CHANNEL_ID);
                 formData.append('text', channelMessage);
@@ -1069,7 +1069,6 @@
                     console.log("✅ Success: Message sent to Channel.");
                     showToast('✓ Order logged to Channel successfully!');
                 } else {
-                    // Detailed Error Logging for Debugging
                     console.error("❌ Telegram API Error:", result.description);
                     showToast(`⚠️ Auto-log Failed: ${result.description}`, true);
                 }
@@ -1080,6 +1079,7 @@
                 const userMessage = `Hello Solar,\n\nI have paid via BEP20.\n\nMy Details:\nName: ${name}\nEmail: ${email}\nProduct: ${productType}\nDetails: ${qtyDetails}\nNotes: ${notes}\n\n(Please find attached my Payment Screenshot)`;
                 
                 const encodedMsg = encodeURIComponent(userMessage);
+                // Uses t.me/Solar98717 as requested
                 const telegramUrl = `https://t.me/${MY_TELEGRAM_USERNAME}?text=${encodedMsg}`;
                 
                 document.getElementById('telegramFinalLink').href = telegramUrl;
