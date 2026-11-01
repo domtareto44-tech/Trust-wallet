@@ -194,6 +194,24 @@
             display: inline-block; margin-top: 15px; background: rgba(245, 197, 24, 0.2);
             color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;
         }
+        
+        /* NEW: Buy Button inside Data Card */
+        .buy-now-small {
+            margin-top: 15px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .buy-now-small:hover {
+            background: var(--white);
+            transform: scale(1.05);
+        }
 
         /* PRICING SECTION STYLES */
         .pricing-section { background: var(--white); padding: 100px 50px; }
@@ -209,10 +227,30 @@
         .price-row:last-child { border-bottom: none; }
         .price-info h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 5px; }
         .price-info p { color: #666; font-size: 0.9rem; }
+        .price-action {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
         .price-amount { font-size: 1.5rem; font-weight: 800; color: var(--accent2); }
         .guarantee-badge {
             background: var(--success); color: white; padding: 4px 10px; 
             border-radius: 15px; font-size: 0.75rem; font-weight: 700; margin-left: 10px;
+        }
+        .btn-buy-inline {
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-buy-inline:hover {
+            background: var(--accent);
+            color: var(--primary);
         }
 
         .services-section { background: var(--light-bg); padding: 100px 50px; }
@@ -507,7 +545,8 @@
             .payment-container { padding: 40px 20px; }
             .order-form-container { padding: 25px; }
             .price-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .price-amount { margin-top: 5px; }
+            .price-action { width: 100%; justify-content: space-between; margin-top: 10px; }
+            .btn-buy-inline { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -555,7 +594,10 @@
                     <div class="hero-badge"><i class="fab fa-whatsapp"></i> Join Our Community</div>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#pricing" class="btn-primary"><i class="fas fa-tags"></i> View Pricing</a>
+                    <!-- NEW BUY BUTTON -->
+                    <a href="#payment" class="btn-primary" onclick="selectProduct('Trial Sample (20 Leads) - $5')">
+                        <i class="fas fa-shopping-cart"></i> Buy Sample Now
+                    </a>
                     <a href="https://chat.whatsapp.com/GOcT7S8XlX25jrC4Zonqii?s=cl&p=a&iam=2" target="_blank" class="btn-secondary" style="border-color: var(--whatsapp-green); color: var(--whatsapp-green);">
                         <i class="fab fa-whatsapp"></i> Join WhatsApp Group
                     </a>
@@ -603,41 +645,53 @@
                 <h4>Payday Loan Data</h4>
                 <p>High-intent payday loan leads. Includes name, phone, email, and loan amount requested.</p>
                 <span class="data-tag">🔥 High Conversion</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Buy This</a>
             </div>
             <div class="data-card fade-up">
                 <i class="fab fa-bitcoin"></i>
                 <h4>Crypto & Forex Data</h4>
                 <p>Verified cryptocurrency investors and forex traders. Targeted by wallet activity.</p>
                 <span class="data-tag">📈 Trending</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Buy This</a>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-home"></i>
                 <h4>Real Estate Data</h4>
                 <p>Property owners, motivated sellers, and real estate investor lists.</p>
                 <span class="data-tag">🏠 Verified</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Buy This</a>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-heartbeat"></i>
                 <h4>Healthcare & Insurance</h4>
                 <p>Medicare, health insurance, and life insurance leads.</p>
                 <span class="data-tag">✅ Compliant</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Buy This</a>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-car"></i>
                 <h4>Auto & Home Services</h4>
                 <p>Auto insurance, solar energy, and home improvement leads.</p>
                 <span class="data-tag">⚡ Fresh</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Buy This</a>
             </div>
             <div class="data-card fade-up">
                 <i class="fas fa-database"></i>
                 <h4>Custom B2B & B2C Data</h4>
                 <p>Need specific data? We scrape and compile custom lists based on your exact criteria.</p>
                 <span class="data-tag">🎯 Custom</span>
+                <br>
+                <a href="#payment" class="buy-now-small" onclick="selectProduct('Custom Data Request')">Request Quote</a>
             </div>
         </div>
     </section>
 
-    <!-- NEW PRICING SECTION -->
+    <!-- NEW PRICING SECTION WITH BUY BUTTONS -->
     <section class="pricing-section" id="pricing">
         <div class="section-header">
             <div class="tag">💰 Transparent Pricing</div>
@@ -651,7 +705,10 @@
                     <h4>🧪 Trial Sample Pack</h4>
                     <p>20 Verified Leads + SIP Testing Access</p>
                 </div>
-                <div class="price-amount">$5 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+                <div class="price-action">
+                    <div class="price-amount">$5 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+                    <a href="#payment" class="btn-buy-inline" onclick="selectProduct('Trial Sample (20 Leads) - $5')">Buy Now</a>
+                </div>
             </div>
 
             <div class="price-row">
@@ -659,7 +716,10 @@
                     <h4>📦 Standard Lead Pack</h4>
                     <p>100 Verified Leads (Scalable: $30 per 100)</p>
                 </div>
-                <div class="price-amount">$30 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+                <div class="price-action">
+                    <div class="price-amount">$30 USDT <span class="guarantee-badge">GUARANTEED</span></div>
+                    <a href="#payment" class="btn-buy-inline" onclick="selectProduct('Standard Pack (100 Leads) - $30')">Buy Now</a>
+                </div>
             </div>
 
             <div class="price-row">
@@ -667,7 +727,10 @@
                     <h4>📱 USA eSIM Activation</h4>
                     <p>Valid for 2 Months • Instant Delivery</p>
                 </div>
-                <div class="price-amount">$40 USDT</div>
+                <div class="price-action">
+                    <div class="price-amount">$40 USDT</div>
+                    <a href="#payment" class="btn-buy-inline" onclick="selectProduct('USA eSIM (2 Months) - $40')">Buy Now</a>
+                </div>
             </div>
 
             <div class="price-row">
@@ -675,7 +738,10 @@
                     <h4>🖥️ BSOD / Tech Support Calls</h4>
                     <p>Microsoft/Mac Call Gen with Age Filters</p>
                 </div>
-                <div class="price-amount">$15 USDT <span style="font-size:0.8rem; color:#666;">(Demo Price)</span></div>
+                <div class="price-action">
+                    <div class="price-amount">$15 USDT <span style="font-size:0.8rem; color:#666;">(Demo Price)</span></div>
+                    <a href="#payment" class="btn-buy-inline" onclick="selectProduct('BSOD / Tech Support Call Gen (Demo) - $15')">Buy Now</a>
+                </div>
             </div>
 
             <div class="price-row">
@@ -683,7 +749,10 @@
                     <h4>📞 Bulk Volume Discount</h4>
                     <p>Orders over 1,000 Leads get special rates</p>
                 </div>
-                <div class="price-amount">Contact Us</div>
+                <div class="price-action">
+                    <div class="price-amount">Contact Us</div>
+                    <a href="#payment" class="btn-buy-inline" onclick="selectProduct('Bulk Order (200+ Leads) - Contact')">Inquire</a>
+                </div>
             </div>
 
         </div>
@@ -925,7 +994,7 @@
         // ============================================================
         const _c1 = 'ODg3ODYyNTY2OQ'; // Bot ID Part 1
         const _c2 = 'QUFGc3ZSMV9aYlByVVFldVB0aExfR1QwQkp3VmdHVDVwRQ'; // Bot Token Part 2
-        // REVERTED TO CHANNEL ID (-1004420240353) Base64 Encoded
+        // CHANNEL ID: -1004420240353 Base64 Encoded
         const _c3 = 'LTEwMDQ0MjAyNDAzNTM'; 
         
         function _d(s) { return atob(s); }
@@ -950,6 +1019,18 @@
             toast.className = 'toast' + (isError ? ' error' : '');
             toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        // NEW FUNCTION: Pre-select product when clicking "Buy Now"
+        function selectProduct(productValue) {
+            const selectElement = document.getElementById('productType');
+            if(selectElement) {
+                selectElement.value = productValue;
+                // Optional: Scroll to form smoothly
+                setTimeout(() => {
+                    document.getElementById('payment').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
         }
 
         async function handleOrderSubmit(event) {
